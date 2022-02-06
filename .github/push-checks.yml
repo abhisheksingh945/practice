@@ -1,0 +1,19 @@
+name: "push checks"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pr_checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.13.2
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.13.2
+      - uses: bahmutov/npm-install@v1
+      - run: npm run lint
+      - run: npm run build
